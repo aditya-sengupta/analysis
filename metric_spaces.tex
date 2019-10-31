@@ -1,0 +1,70 @@
+\documentclass[./analysis.tex]{subfiles}
+
+\begin{document}
+
+    \section{Metric Spaces}
+    \subsection{Motivation}
+
+    So far, we've built up a lot of tools that allowed us to define limits and continuity on the real line, which opens up a ton of possibilities. Some of the cool results you can prove are the intermediate, mean, and extreme value theorems; the definitions of a derivative and integral (Darboux and Riemann, and their equivalence); why the chain rule works; and Taylor's theorem and the theoretical foundation for being able to expand analytic functions into a power series. But instead of just building this theory for the reals, we could look at more general spaces, derive more powerful results, and talk about more general spaces along with the reals all at once.
+    For example, suppose we'd like to talk about how functions, random variables, or binary strings converge when we operate on them somehow. The study of metric spaces asks the question: what are the essential components of the reals that allowed us to build up our ideas of convergence and continuity, and how can we make those more general?
+
+    \subsection{Defining a metric space}
+
+    %One property of the reals that we'd like to generalize is completeness, the idea that every Cauchy sequence in $\R$ converges in $\R$. 
+    If you're given a set, it seems pretty clear how to define a sequence of points in that set: just pick one of them for each $n \in \N^+$. Proving whether it converges might be harder. We've built up an intuitive idea that convergence means we get closer and closer to some point, but what's meant by ``close'' when we don't know what distance looks like outside of the real line? For example, how far away is one function $f: \R \to \R$ from another?
+
+    We can define our own idea of what distance means if we look at the essential properties we've been using of our distance function on $\R$ (the absolute value of the difference). It's always positive, and if two points are the same then they have distance zero (and vice versa). It's symmetric: it doesn't matter if I do $|x - y|$ or $|y - x|$. And the property we've used most of all is the triangle inequality. Based on this, we define the requirements for a function to be a distance function on a set, or \emph{metric}.
+
+    \begin{mycolorbox}{blue}{Definition of a metric}
+        A metric on a set $X$ is a function $d: X \times X \to \R^+$ such that for all $x, y, z \in X$,
+
+        \begin{enumerate}
+            \item $d(x, y) = 0$ if and only if $x = y$: no distinct points can be zero distance apart.
+            \item $d(x, y) = d(y, x)$: distance is the same whether I start with $x$ or $y$.
+            \item $d(x, y) \leq d(x, z) + d(z, y)$: the triangle inequality.
+        \end{enumerate}
+    \end{mycolorbox}
+    
+    One reason why this is a nice definition is the conceptual symmetry with an equivalence relation: both of them have conditions relating to reflexivity, symmetry, and transitivity. (As far as I know, this symmetry is \emph{only} conceptual, and it doesn't really make sense to talk about equivalence classes under a metric as some sort of subspace, because, for example, transitivity won't hold like you want it to.) Further, we've encapsulated all the properties we implicitly or explicitly liked about the absolute value distance. Finally, we can use our metric to convert questions about how close points in an arbitrary space are to questions about how close the real-number outputs of the metric are.
+
+    \begin{mycolorbox}{blue}{Definition of a metric space}
+        A metric space $(X, d)$ is any set $X$ paired with a metric $d$ on $X$.
+    \end{mycolorbox}
+    
+    \subsection{$\R$ as a metric space}
+
+    Since we built this definition of a metric space with the motivation that we want to generalize properties of the reals, a first sanity check would be to verify that $\R$ with $d_1(x, y) = |x - y|$ is a metric space. We can easily see that the absolute value is a valid metric. What's interesting, though, is that this isn't the only possible metric on $\R$. For example, consider the trivial-looking metric
+
+    \begin{align*}
+        d_0: \R \times \R \to \R^+, d_0(x, y) = \begin{cases} 0 & x = y \\ 1 & x \neq y \end{cases}
+    \end{align*}
+
+    This is reminiscent of a Dirac delta (just that this is nonzero everywhere the Dirac delta would be zero, and this is more well-defined.) Note that we can't say this is $1 - \delta_{xy}$ (the Kronecker delta) as we're working in a continuous space. This satisfies all of the requirements for being a metric, so we could use it. The tradeoff for the relative simplicity is that we lose the ability to talk about convergence in many cases. For example, I can't show that $s_n = \frac{1}{n}$ converges to 0 under this norm, because I can't say any particular term gets $\epsilon-$small unless I actually reach 0 (which I don't). The sequence of distances is $(1, 1, 1, 1, \dots)$, so if I pick any $\epsilon < 1$ I can't say there exists an $N$ such that $n > N \implies d_0(s_n, 0) < \epsilon$.
+
+    Another interesting norm on the reals is the squared distance: $d_2(x, y) = (x - y)^2$. This has essentially the same behaviour as the absolute value --- any convex even function applied to $x - y$ would have the same characteristics. Nonetheless, it's interesting to look at these because they scaffold the idea of the $L_p$ norms that we'll look at next, which is in turn going to let us show that $\R^n$ is a valid metric space.
+
+    \subsection{Norms}
+
+    There are other properties of the absolute value, such as idempotence ($||a|| = |a|$) or multiplicativity ($|ab| = |a||b|$), so it's natural to ask why those aren't part of the definition of a metric. The answer is that generalizing these to a metric doesn't really make sense. The absolute value mapped pairs of real numbers to other real numbers, and it had an implicit idea that you could take the absolute value of one point in $\R$ by looking at its distance from zero. We could generalize the second by saying that conventionally $d(x) = d(x, 0)$ for some definition of zero in each space, but if the space we're looking at isn't the reals, then either idempotence or multiplicativity would need us to look at $d$ of a real number, which isn't defined. Some properties of the absolute values therefore can't be generalized to a metric, but we didn't really use these when we were establishing real analysis anyway, so this is fine.
+
+    Nonetheless, the idea of looking at the magnitude of a real number $|a|$ by looking at its distance from zero was useful, and we'd like to make a conceptual generalization of this way of looking at the absolute value, just without necessarily extending all the individual properties. This will give us a different angle on the triangle inequality that'll be easier to deal with, and will give us some more general results for dealing with metric spaces so that we can establish some more examples.
+
+    \subsection{$\R^n$ as a metric space}
+
+    A natural space to look at is the multidimensional space of reals $\R^n$. A natural choice of metric is the Euclidean distance, and now that we've built up the theory of norms, we can show this works.
+
+    \begin{mycolorbox}{blue}{The Euclidean distance is a metric on $\R^n$}
+        The Euclidean distance $d_2(x, y) = \sqrt{\sum_{i=1}^n (x_i - y_i)^2}$ between points $x = (x_1, \dots, x_n), y = (y_1, \dots, y_n) \in \R^n$ is a metric on $\R^n$.
+    \end{mycolorbox}
+
+    \begin{proof}
+        \begin{enumerate}
+            \item If the Euclidean distance between $x$ and $y$ is zero, then $x_i = y_i$ for all $1 \leq i \leq n$, so $x = y$. (This works in both directions.)
+            \item Symmetry holds because $d_2(x, y) = \sqrt{\sum_{i=1}^n (x_i - y_i)^2} = \sqrt{\sum_{i=1}^n (y_i - x_i)^2} = d_2(y, x)$.
+            \item The triangle inequality is geometrically obvious, but its proof requires that we build some more machinery first.
+        \end{enumerate}
+    \end{proof}
+
+    Oops. The triangle inequality needs the Cauchy-Schwartz inequality, which means we need some idea of a norm. I'll come back to this.
+
+\end{document}

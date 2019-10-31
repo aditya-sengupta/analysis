@@ -1,0 +1,113 @@
+\documentclass[./analysis.tex]{subfiles}
+
+\begin{document}
+    \section{The construction of the real numbers}
+
+    I've skipped some content on precise definitions of certain sets and operations, subsequential limits, sums and products of sequences, convergence testing, and calculus due to a lack of relevance or because those things work like we'd expect: instead, I presented only the parts necessary for metric spaces, topology, and measure theory. If I come back to this and add Math 214, I may edit this to include calculus.
+
+    \subsection{Motivation}
+
+    I like to think of analysis as (at least some of) the math that arises when you unleash your inner annoying three-year-old and ask ``why?'' to everything. Specifically, it arises when you do this to calculus. There are strong reasons to ask questions about calculus, as it's possibly the type of mathematics that's used the most in other fields.%: any time there's something that changes smoothly, from the position of an object to a model of the stock market, we use calculus.
+
+    For example, let's start with the fact that \textcolor{red}{to maximize or minimize a function, we take a derivative and set it to zero.}
+
+    \noindent\emph{Why?} Because a zero derivative is a flat point on the curve of a function.\\
+    \emph{Why?} Because a derivative represents the local infinitesimal change in a function.\\
+    \emph{Why?} Because a derivative is the limit $\lim\limits_{h \to 0} \frac{f(x + h) - f(x)}{h}$; some change in a function over a corresponding change in the input.\\
+    \emph{Why?} Because as we go arbitrarily close to a point, all local changes look close enough to straight lines.\\
+    \emph{Why?} Because we can get as close as we want to any point and make that true.\\
+    \emph{Why?} Because of how we construct the real line, so that it doesn't have any gaps.\\
+    \emph{Why?} Look below!
+
+    Pretty quickly, we get to fundamental questions about what real numbers actually are, why our definitions (such as the limit definition of a derivative) are the way they are, what things like ``arbitrarily close'' mean, and so on. The part of real analysis I'm going to cover is the first of these: how we construct $\R$ through a sequence of closing certain sets under operations (making it so that the result of an operation is always within the set.)
+
+    \subsection{Construction of common sets}
+
+    We're going to start building things up from the idea that I can look at a set of things and say ``there are three things here'' (I'm not going to get into the details of what a set is.) I know there are three because there's two and one more, so there's one and one and one more. We can formalize this idea as a \emph{successor function} and define the natural numbers that way.
+
+    \paragraph*{Natural numbers} $\N = \set{0, 1, 2, 3, \dots}$; starting from zero, the set of all successors of elements of $\N$. The precise construction of $\N$ doesn't matter for understanding analysis, but you can look up the Peano axioms if you're interested. (This is the foundation for why mathematical induction works!) Addition and multiplication are defined rigorously according to this, but let's assume we know how those work. Further, we can formalize subtraction as inverse addition, which gives us the idea of the additive inverse $-n$ of $n$. We can extend the natural numbers to include these inverses.
+
+    \paragraph*{Integers} $\Z = \set{\dots, -3, -2, -1, 0, 1, 2, 3, \dots}$; $\N$ along with its negation. $\Z = \N \union \set{-n \mid n \in \N}$. This closes $\N$ under subtraction, i.e. creates the set of everything you can reach by taking the difference of natural numbers. This idea of ``completing'' a space will come in soon, when we try to construct the real numbers! We can also define multiplication on the integers, but we find that not every product has an inverse in $\Z$, so we can extend this further.
+
+    \paragraph*{Rational numbers} $\Q$ can be thought of as the set of pairs $(a, b)$ where $a, b \in \Z$ and $b \neq 0$, and we define division accordingly. This is almost but not quite correct, because two fractions can be the same and have different representations; for example, $\frac{1}{2} = \frac{2}{4}$. This is where we get to use equivalence relations: we say the pair $(a, b) \sim (c, d)$ if $\frac{a}{b} = \frac{c}{d}$. Further, since we only know what multiplication is so far, we rewrite this as $a \cdot d = b \cdot c$. $\Q$ is the set of equivalence classes under this equivalence relation.
+
+    We've got some idea that $\Q$ has ``gaps'' in it. For example, I can define the polynomial $x^2 - 2$ and show that I can't make that zero for any choice of $x \in \Q$. So, we want to define the completion of $\Q$ that fills in these gaps. It'll turn out that ``completion'' is actually a formal term: $\R$ is the smallest complete metric space that contains $\Q$. The problem here is we haven't defined what we mean by ``smallest'', ``complete'', or ``metric space'' yet, so let's get on that. For now we can think of $\R$ as the set that fills in the gaps in $\Q$, and add rigor to that when we've built up the machinery to do this.
+
+    \subsection{Tools to Build $\R$ from $\Q$}
+
+    \begin{mycolorbox}{blue}{Infimum and supremum}
+    The \emph{infimum} of a set $\inf S$ is its maximal (largest possible) lower bound; for all $s \in S$, $\inf S \leq s$, and if there is another lower bound $m$ such that for all $s \in S, m \leq s$ then $\inf S \geq m$. Similarly, the \emph{supremum} of a set $\sup S$ is its minimal (smallest possible) upper bound; for all $s \in S, \sup S \geq s$ and if there is another upper bound $M$ such that for all $s \in S, M \geq s$ then $\sup S \leq M$.
+    \end{mycolorbox}
+
+    Think of the infimum and supremum as versions of the minimum and maximum that work for infinite sets. When a set is finite, $\inf S = \min S$ and $\sup S = \max S$. But when the set is infinite, we often can't talk about a minimum or maximum, so we use infimum or supremum instead. For example, the open interval $(0, 1) \in \R$ doesn't have a minimum element --- if you suggest any element as the minimum, I can divide it by 2 and it'll be smaller but still in the set --- but its infimum is 0 and supremum is 1 (try to prove this!)
+
+    \begin{mycolorbox}{blue}{The Triangle Inequality on $\R$} 
+        For $a, b \in \R$, $|a + b| \leq |a| + |b|$; the sum of two real numbers is less than or equal to the sum of their magnitudes. We can prove this by cases. We'll use this a lot, even when we move past the reals!
+    \end{mycolorbox}
+
+    \begin{mycolorbox}{blue}{Denseness of $\Q$ in $\R$} For $a, b \in \R$, there's some $q \in \Q$ such that $ a < q < b$. \end{mycolorbox}
+
+    \begin{proof}
+        $b - a > 0 \implies$ there's some $n \in \N$ such that $n(b - a) > 1 \implies nb > na + 1$ (this is the Archimedean property, which we don't need for anything but this proof). We want $m \in \N$ such that $nb > m > na \implies b > \frac{m}{n} > a$. 
+
+        Intuitively, $m$ should be the smallest integer greater than $an$. This can be shown explicitly: there's at least one natural number $k$ greater than $|an|$ by the Archimedean property, so let's make a set of all the integers between $an$ and $k$. Let $S = \set{z \in \Z \mid |an| \leq z \leq k}$. Because $k \in S, S \neq \varnothing$. Also, $S$ is finite, because $-k \leq an \leq k$. Moreover, $\min S$ exists because $S \subset \Z$ and it is finite. Let $m = \min S$. Then $m \in S \implies m > an$, but $m - 1 \leq a_n$, because otherwise $m-1$ would be $\min S$. So $an < m \leq an + 1 < bn$. Therefore $m$ exists, meaning $\frac{m}{n}$ exists, as required.
+    \end{proof}
+
+    Denseness is nice, because it gives us some idea that even if we can't write out a rational form for every real number, we can make a seqeuence of rational numbers that get closer and closer to it. For example, we can define a sequence $(1, 1.4, 1.41, 1.414, \dots)$ that gets closer and closer to $\sqrt{2}$. Let's formalize this idea.
+
+    \begin{mycolorbox}{blue}{Convergence of a sequence of reals / definition of a limit} We say $(s_n) \to s$, or $\lim\limits_{n \to \infty} s_n = s$, if for every $\epsilon > 0$ there exists an $N$ such that for any $n > N$ we know that $|s_n - s| < \epsilon$. (I'll often say ``$s_n$ is $\epsilon$-close to $s$'', or if $s_n$ gets arbitrarily small (close to 0), ``$s_n$ is $\epsilon-$small.'') \end{mycolorbox}
+
+    This is a nice way to define convergence, because it gives us a quantitative way of saying ``$s_n$ gets close to $s$''. $|s_n - s|$ is a measure of how close $s_n$ is to $s$, so the above statement guarantees that at some finite point in the sequence, $|s_n - s| < \epsilon$, that is, $s_n$ is separated from $s$ by at most $\epsilon$. Since we require that this is true of any $\epsilon > 0$, this means that we can get as close as we want to $s$ by going sufficiently far in the sequence $(s_n)$. Further, since we require that all $n > N$ have $|s_n - s| < \epsilon$, we can't have the sequence moving further away: it can only get closer and closer to $s$, like we want for convergence.
+
+    %\paragraph*{Divergence of a sequence of reals} We say $(s_n)$ diverges if there does not exist any $s \in \R$ that satisfies the above definition of convergence. We say the limit of $(s_n)$ exists if $\lim s_n \in \R$ or if it diverges to $\pm\infty$. We can formalize divergence to $\pm\infty$ similarly to how we formalized convergence, just that now there's an $N$ such that $n > N$ implies $s_n > \epsilon$ or $s_n < -\epsilon$ for any $\epsilon > 0$ that I can pick.
+
+    \subsection{Building $\R$ from $\Q$}
+
+    Now that we know what convergence is, let's try and build up the set of limits that we can construct with sequences of rational numbers, since we intuitively know that we should be able to reach any real number with a sequence of rationals. This requires that we build a mechanism to check whether a sequence is going to converge without us knowing its limit upfront. If we're going to define a real number by the limit of a certain sequence, we can't require that we know the limit of a convergent sequence to say that it converges. 
+
+    An observation that could help us here is that when a sequence converges, the difference between terms gets arbitrarily small as you go further in the sequence. For example, take $s_n = \frac{1}{n}$ and consider the differences between successive terms: we get $1 - \frac{1}{2} = \frac{1}{2}, \frac{1}{2} - \frac{1}{3} = \frac{1}{6}, \frac{1}{3} - \frac{1}{4} = \frac{1}{12}$, and so on getting smaller and smaller. We'll soon prove that this is an if-and-only-if, therefore we can characterize convergence based on this property of successive differences, or general differences between any two terms that are sufficiently far in the seqeuence. Let's formalize this:
+
+    \begin{mycolorbox}{blue}{Cauchy sequences} A sequence is Cauchy if for every $\epsilon > 0$ there exists an $N$ such that for any two $m, n > N$ we know that $|s_m - s_n| < \epsilon$. \end{mycolorbox}
+
+    To show that this is an equivalent property to being convergent, we'll need the folowing intermediate steps.
+
+    %\paragraph*{Monotone sequences} A sequence $(s_n)$ is non-decreasing if for all $n$, $s_n \leq s_{n+1}$, and non-increasing if for all $n$, $s_n \geq s_{n+1}$. (These are just sort of what we expect.) We say a sequence is monotone if it's either non-decreasing or non-increasing.
+
+    %\paragraph*{A bounded monotone sequence converges} This is a fun one to prove: think about what its lim inf and lim sup have to be.
+
+    \paragraph*{Boundedness} A set is bounded if $-\infty < \inf S \leq \sup S < \infty$, that is, it can be lower- and upper-bounded by finite real numbers. A sequence is bounded if the set of all its values is bounded. If a sequence converges it is bounded.
+
+    \paragraph*{Bolzano-Weierstrass theorem} Every bounded sequence has a convergent subsequence (a selection of infinitely many of its elements such that it converges). For example, $s_n = (-1)^n$ has the convergent subsequences of $s_{2n} = (1, 1, 1, \dots)$ and $s_{2n+1} = (-1, -1, -1, \dots)$. Note that subsequences have to be infinite.
+
+    \paragraph*{Cauchy sequences are bounded} If $(s_n)$ is Cauchy, then it is bounded.
+
+    \begin{proof}
+        Pick $\epsilon = 1$ and find the corresponding $N$, and by taking its ceiling if required we can say it's an integer. Then for any $n > N$, we get that $|s_n| - |s_{N + 1}| \leq |s_n - s_{N + 1}| < 1$ so $|s_n| < |s_{N + 1}| + 1$ for all $n > N$. Then every element of the sequence is either in the first $N^+$ or is in this upper bound, so $(|s_n|)$ is bounded by $M = \sup\set{|s_1|, \dots, |s_{N}|, |s_{N + 1}| + 1}$. (you can replace sup with max here as it's a finite set.) Therefore $(s_n)$ is at most $M$ and is at least $-M$, so it's bounded.
+    \end{proof}
+    
+    \begin{mycolorbox}{blue}{Cauchy $\iff$ convergent} Any convergent sequence is Cauchy and any Cauchy sequence is convergent.\end{mycolorbox}
+
+    \begin{proof}
+        In the direction convergent $\implies$ Cauchy: suppose $(s_n) \to s$. Then for a fixed $\epsilon > 0$ there's an $N$ such that $n > N \implies |s_n - s| < \frac{\epsilon}{2}$ and $m > N \implies |s_m - s| < \frac{\epsilon}{2}$. Then we use the triangle inequality:
+
+        \begin{align*}
+            |s_m - s_n| = |(s_m - s) - (s_n - s)| \leq |s_m - s| + |s_n - s| < \frac{\epsilon}{2} + \frac{\epsilon}{2} < \epsilon
+        \end{align*}
+
+        so $(s_n)$ is Cauchy. 
+
+        In the direction Cauchy implies convergent: we know a Cauchy sequences is bounded, so by the Bolzano-Weierstrass theorem, it has a convergent subsequence $(s_{n_k}) = (s_{n_1}, s_{n_2}, \dots)$, so if we believe that it converges, then it has to converge to the limit of the subsequence. Call this subsequential limit $s$. Fix $\epsilon > 0$ and take $N_1$ such that $m, n > N_1 \implies |s_m - s_n| < \frac{\epsilon}{2}$. Then, pick some $s_{n_k}$ in the subsequence; because it converges, we know that for the same choice of $\epsilon$ as before, there exists some $N_2$ such that $n_k > N_2 \implies |s_{n_k} - s| < \frac{\epsilon}{2}$. 
+
+        Finally, we choose $N = \max\set{N_1, N_2}$ and choose some $n_k > N$ (since subsequences are infinite, we're allowed to do this). Then,
+
+        \begin{align*}
+            n > N \implies |s - s_n| &= |(s - s_{n_k}) + (s_{n_k} - s_n)| & \\&\leq |s - s_{n_k}| + |s_{n_k} - s_n| & \text{ triangle inequality}\\
+            &< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon & n_k, n > N \text{ and } (s_n) \text{ Cauchy, and subsequence converges}
+        \end{align*}
+
+        Therefore $n > N \implies |s - s_n| < \epsilon$, i.e. the sequence converges.
+    \end{proof}
+
+    This completes the machinery we need to build $\R$: we identify each element of $\R$ as a Cauchy sequence consisting of elements of $\Q$. We can see that with this definition, $\Q \subset \R$, because we can just take the sequence $(q, q, q, \dots)$. This isn't the unique way to construct $\R$ (look up Dedekind cuts for an equivalent one), but this is the construction of $\R$ that scaffolds the theory of metric spaces.
+
+\end{document}

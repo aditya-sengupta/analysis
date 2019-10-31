@@ -1,0 +1,15 @@
+\usepackage{custom}
+\usepackage{tcolorbox}
+\DeclareMathOperator{\st}{s.t.}
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+\newcommand{\F}{\mathcal{F}}
+
+\newtcolorbox{mycolorbox}[3][]
+{
+  colframe = #2!25,
+  colback  = #2!10,
+  coltitle = #2!20!black,  
+  title    = {#3},
+  #1,
+}

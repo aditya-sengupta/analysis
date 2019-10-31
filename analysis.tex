@@ -1,0 +1,39 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.5in]{geometry}
+
+\title{A Primer on Analysis, Topology, and Measure Theory}
+\author{Aditya Sengupta}
+
+\usepackage{analysis}
+\usepackage{subfiles}
+\let\oldsection\section
+\renewcommand\section{\clearpage\oldsection}
+
+\begin{document}
+    \maketitle
+
+    This is a document with multiple purposes:
+
+\begin{enumerate}
+    \item To relate measure theory content from Math 202A to probability content from EE 126.
+    \item To act as an easy reference for the Math 104 content that's used in Math 202A.
+    \item As a replacement for lecture notes for Math 202A, because I don't understand what's going on there right now.
+\end{enumerate}
+
+I'm going to try and keep this compact. %In other words, this document is going to be a finite subcover of Math 104 and Math 202A (hopefully, by the end, you'll find that hilarious.) 
+This means that sometimes, I'll have a definition that's somewhat opaque, or dependent on a lot of terms that were just introduced (otherwise this would be 200 pages and it'd be scary to even start reading.) I'll try and illustrate those with examples, or provide a restatement in simpler words, whenever that happens.    
+
+Section 1 consists of mathematical preliminaries: basic notation, and the definition of an equivalence relation (because it comes up in some surprising places). Sections 2 and 3 runs the reader through the essential parts of real analysis to understand metric spaces, in what I hope are relatively easy terms. Section 4 is an introduction to metric spaces, Section 5 covers topology, and Section 6 covers measure theory.
+
+    \tableofcontents
+    \let\tableofcontents\relax
+
+    \subfile{preface.tex}
+    \subfile{construction_of_R.tex}
+    \subfile{real_analysis.tex}
+    \subfile{metric_spaces.tex}
+    \subfile{topology.tex}
+    \subfile{measure_theory.tex}
+    \subfile{appendix.tex}
+
+\end{document}

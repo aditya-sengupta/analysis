@@ -1,0 +1,45 @@
+\documentclass[./analysis.tex]{subfiles}
+ 
+\begin{document}
+
+\section{Preliminaries}
+
+\subsection{Philosophizing}
+
+I like talking about math in accessible terms. It's very easy for notation and terminology and the details of proofs to obscure ideas that are inherently not that complicated --- and this happens far too often in real analysis and measure theory. No one would care that a sequence is convergent if and only if it is Cauchy, if it's just presented as statements in a vacuum, without any context for why it's a question that anyone would care about. But any piece of mathematical theory was once invented and put down on paper by someone, and that person had reasons for caring about the question, and reasons why they came up with the answer that they did. Math is much more fun when you take this perspective --- instead of a sequence of absolute truths, it's a collection of aesthetic decisions. 
+
+To that end, I'm going to do my best to present the thinking behind why we care about specific concepts, and why definitions are the way they are. I'm also going to try and keep this document as self-contained and jargon- and notation-free as possible. However, there are some things that it helps to know upfront, which I present just below. Additionally, there will be places where machinery is introduced before it's immediately obvious why it's necessary, just to maintain the flow of reasoning without having to pause in the middle of a proof to define a whole new framework for something. Sometimes a justification will be ``this will make sense when we get to (some later topic)'' --- I don't like doing that, but sometimes it's true, so bear with me when that happens. I also hate the phrase ``it turns out that'' preceding by some very convenient result, and a proof of that result that makes the larger goal trivial. Wherever possible, I'll fill in gaps like that with some indication of how you could think of this yourself.
+
+\subsection{Notation}
+\begin{center}
+    \begin{tabular}{cc}
+        $\forall$ & for all / for every\\
+        $\exists$ & there exists\\
+        $\st$ & such that\\
+        $P \implies Q$ & $P$ implies $Q$: if $P$ is true, $Q$ is true\\
+        $P \iff Q$ & $P$ if and only if $Q$: equivalent to $P \implies Q$ and $Q \implies P$\\
+        $x \in S$ & $x$ is an element of the set $S$\\
+        $x \not\in S$ & $x$ is not an element of the set $S$\\
+        $\varnothing = \set{}$ & the empty set\\
+        $A \subseteq B$ & $A$ is a subset of $B$: $\forall x \in A, x \in B$\\
+        $A \subset B$ & $A$ is a proper subset of $B$ ($A \subseteq B$ and $A \neq B$)\\
+        $|A|$ & cardinality or size of $A$ (usually, the number of elements in a finite set)
+    \end{tabular}
+\end{center}
+
+\subsection{The Axiom of Choice}
+
+The Zermelo-Fraenkel axioms with the Axiom of Choice (ZFC) are basic facts about sets that we consider to be true and build on further. Most of them are intuitive and seem reasonable as a starting point (which is why I won't list them here), but the Axiom of Choice is somewhat controversial. It states that for any collection of sets $C$, we can define a function $f$ that takes in any set in the collection, and returns one of its elements. That is, there exists a function $f$ such that for each $S \in C$, $f(S) \in S$. This seems obviously true: for example, I can say ``take the minimum element'' on the collection $\set{\set{1, 2}, \set{4, 5}, \set{6, 7}}$ and get a function that returns $\set{1, 4, 6}$. However, we're going to run into some surprising results that are equivalent to the AoC, and some that seem intuitively false but hold because of the AoC!
+
+\subsection{Equivalence Relations}
+Consider a set $S$ and elements $a, b, c \in S$. An equivalence relation on $S$ is some statement of the form ``$a$ is related to $b$'', denoted $a \sim b$, that satisfies these properties:
+
+\begin{enumerate}
+    \item Reflexive: every element of $S$ is related to itself, $a \sim a$.
+    \item Symmetric: if $a$ is related to $b$ then $b$ is related to $a$, $a \sim b \implies b \sim a$.
+    \item Transitive: if $a$ is related to $b$ and $b$ is related to $c$, then $a$ is related to $c$, $a \sim b, b \sim c \implies a \sim c$.
+\end{enumerate}
+
+As an example, consider equality: $a = a$, if $a = b$ then $b = a$, if $a = b$ and $b = c$ then $a = c$. $a \leq b$ is another equivalence relation that we can use when we've defined the idea of an order on a set (a level of theory that I'm going to skip). We're going to see a few different examples of equivalence relations, whenever we define some property that holds on a set but not uniquely, so we need to pick a representative of each set of elements that satisfy the equivalence relation, called an \emph{equivalence class}.
+
+\end{document}

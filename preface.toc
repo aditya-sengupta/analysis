@@ -1,0 +1,5 @@
+\contentsline {section}{\numberline {1}Preliminaries}{2}% 
+\contentsline {subsection}{\numberline {1.1}Philosophizing}{2}% 
+\contentsline {subsection}{\numberline {1.2}Notation}{2}% 
+\contentsline {subsection}{\numberline {1.3}The Axiom of Choice}{2}% 
+\contentsline {subsection}{\numberline {1.4}Equivalence Relations}{2}% 

@@ -1,0 +1,33 @@
+\contentsline {section}{\numberline {1}Preliminaries}{3}% 
+\contentsline {subsection}{\numberline {1.1}Philosophizing}{3}% 
+\contentsline {subsection}{\numberline {1.2}Notation}{3}% 
+\contentsline {subsection}{\numberline {1.3}The Axiom of Choice}{3}% 
+\contentsline {subsection}{\numberline {1.4}Equivalence Relations}{3}% 
+\contentsline {section}{\numberline {2}The construction of the real numbers}{4}% 
+\contentsline {subsection}{\numberline {2.1}Motivation}{4}% 
+\contentsline {subsection}{\numberline {2.2}Construction of common sets}{4}% 
+\contentsline {subsection}{\numberline {2.3}Tools to Build $\mathbb {R}$ from $\mathbb {Q}$}{5}% 
+\contentsline {subsection}{\numberline {2.4}Building $\mathbb {R}$ from $\mathbb {Q}$}{5}% 
+\contentsline {section}{\numberline {3}Real Analysis}{7}% 
+\contentsline {subsection}{\numberline {3.1}Proving $\mathbb {R}$ Is What We Expect}{7}% 
+\contentsline {subsection}{\numberline {3.2}Continuous Functions on $\mathbb {R}$}{9}% 
+\contentsline {section}{\numberline {4}Metric Spaces}{12}% 
+\contentsline {subsection}{\numberline {4.1}Motivation}{12}% 
+\contentsline {subsection}{\numberline {4.2}Defining a metric space}{12}% 
+\contentsline {subsection}{\numberline {4.3}$\mathbb {R}$ as a metric space}{12}% 
+\contentsline {subsection}{\numberline {4.4}Norms}{13}% 
+\contentsline {subsection}{\numberline {4.5}$\mathbb {R}^n$ as a metric space}{13}% 
+\contentsline {section}{\numberline {5}Topology (TBD)}{14}% 
+\contentsline {subsection}{\numberline {5.1}Motivation}{14}% 
+\contentsline {subsection}{\numberline {5.2}Construction of Topologies}{14}% 
+\contentsline {subsection}{\numberline {5.3}Strength of a Topology}{14}% 
+\contentsline {section}{\numberline {6}Measure Theory}{15}% 
+\contentsline {subsection}{\numberline {6.1}Motivation}{15}% 
+\contentsline {subsection}{\numberline {6.2}Measures}{15}% 
+\contentsline {subsubsection}{\numberline {6.2.1}Motivation for Sigma-Algebras: The Vitali Set}{15}% 
+\contentsline {subsubsection}{\numberline {6.2.2}Sigma-Algebras}{16}% 
+\contentsline {subsubsection}{\numberline {6.2.3}Defining a Measure Space}{16}% 
+\contentsline {subsection}{\numberline {6.3}Probability as a Measure}{17}% 
+\contentsline {subsubsection}{\numberline {6.3.1}Constructing a Measure: the Lebesgue Measure on the Real Line}{18}% 
+\contentsline {subsubsection}{\numberline {6.3.2}Constructing a Measure for General Spaces}{18}% 
+\contentsline {section}{\numberline {7}Appendix}{19}% 
